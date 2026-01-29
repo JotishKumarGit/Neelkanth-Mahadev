@@ -27,91 +27,8 @@ body {
     line-height: 1.6;
 }
 
-/* Topbar Styles */
-.topbar {
-    background: var(--gradient-chemical);
-    padding: 12px 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1001;
-    animation: slideDown 0.5s ease-out;
-}
+/* navbar */
 
-@keyframes slideDown {
-    from {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.topbar-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.topbar-left,
-.topbar-right {
-    display: flex;
-    gap: 25px;
-    align-items: center;
-}
-
-.topbar-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--dark-bg);
-    font-weight: 600;
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
-
-.topbar-item:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.2);
-}
-
-.topbar-item i {
-    font-size: 16px;
-}
-
-.social-links {
-    display: flex;
-    gap: 12px;
-}
-
-.social-links a {
-    width: 32px;
-    height: 32px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--dark-bg);
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-}
-
-.social-links a:hover {
-    background: var(--dark-bg);
-    color: var(--primary-color);
-    transform: translateY(-3px) rotate(360deg);
-}
-
-/* Header/Navbar Styles */
 header {
     background: rgba(10, 14, 39, 0.95);
     backdrop-filter: blur(20px);
@@ -289,6 +206,31 @@ nav {
     box-shadow: 0 8px 30px rgba(255, 107, 53, 0.6);
 }
 
+/* ##########################  Off canvas menu css start  ########################## */
+
+/* Offcanvas Menu */
+.offcanvas-menu {
+    position: fixed;
+    top: 136px;
+    right: -100%;
+    width: 100%;
+    max-width: 400px;
+    height: calc(100vh - 136px);
+    background: rgba(10, 14, 39, 0.98);
+    color: white;
+    backdrop-filter: blur(30px);
+    padding: 30px;
+    overflow-y: auto;
+    transition: right 0.3s ease;
+    border-left: 3px solid var(--primary-color);
+    box-shadow: -10px 0 50px rgba(0, 212, 255, 0.3);
+    z-index: 999;
+}
+
+.offcanvas-menu.active {
+    right: 0;
+}
+
 /* Mobile Menu Toggle */
 .menu-toggle {
     display: none;
@@ -317,49 +259,44 @@ nav {
     opacity: 0;
 }
 
-.menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(8px, -8px);
-}
-
-/* Offcanvas Menu */
-.offcanvas-menu {
-    position: fixed;
-    top: 136px;
-    right: -100%;
-    width: 100%;
-    max-width: 400px;
-    height: calc(100vh - 136px);
-    background: rgba(10, 14, 39, 0.98);
-    color: white;
-    backdrop-filter: blur(30px);
-    padding: 30px;
-    overflow-y: auto;
-    transition: right 0.3s ease;
-    border-left: 3px solid var(--primary-color);
-    box-shadow: -10px 0 50px rgba(0, 212, 255, 0.3);
-    z-index: 999;
-}
-
-.offcanvas-menu.active {
-    right: 0;
-}
-
 .offcanvas-menu .nav-links {
+    display: flex;
     flex-direction: column;
     align-items: stretch;
     width: 100%;
 }
 
-.offcanvas-menu .nav-links>li>a {
-    padding: 15px;
-    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(8px, -8px);
 }
 
+
+.offcanvas-menu .nav-links>li>a {
+    padding: 15px 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--light-text);
+    border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Dropdown icon rotate */
+.offcanvas-menu .nav-links>li.active .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+/* Mega dropdown (mobile style) */
 .offcanvas-menu .mega-dropdown {
     position: static;
     display: none;
     margin-top: 10px;
     padding: 15px;
+    background: rgba(0, 212, 255, 0.05);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 12px;
+
     min-width: auto;
     opacity: 1;
     transform: none;
@@ -367,13 +304,109 @@ nav {
 }
 
 .offcanvas-menu .nav-links>li.active .mega-dropdown {
-    display: grid;
+    display: block;
 }
 
+.offcanvas-menu .mega-dropdown-column h4 {
+    font-size: 16px;
+}
+
+.offcanvas-menu .mega-dropdown-column ul li a {
+    padding: 8px 10px;
+}
+
+/* Enquiry button */
 .offcanvas-menu .enquiry-btn {
-    margin-top: 20px;
+    margin-top: 25px;
     justify-content: center;
 }
+
+/* ##########################  Off canvas menu css end  ########################## */
+
+/* Topbar Styles */
+.topbar {
+    background: var(--gradient-chemical);
+    padding: 12px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1001;
+    animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.topbar-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.topbar-left,
+.topbar-right {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.topbar-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--dark-bg);
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.topbar-item:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.2);
+}
+
+.topbar-item i {
+    font-size: 16px;
+}
+
+.social-links {
+    display: flex;
+    gap: 12px;
+}
+
+.social-links a {
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark-bg);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.social-links a:hover {
+    background: var(--dark-bg);
+    color: var(--primary-color);
+    transform: translateY(-3px) rotate(360deg);
+}
+
 
 /* Hero Section */
 .hero-section {
